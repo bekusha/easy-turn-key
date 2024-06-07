@@ -22,7 +22,7 @@ const Tabs: React.FC<TabsProps> = ({ tabs, selectedTab, onTabChange }) => {
           className={`relative px-3.5 py-2 ${
             selectedTab === tab.id
               ? "text-purple-500 md:bg-purple-600 md:text-white"
-              : "text-gray-500 md:bg-gray-200 md:text-gray-600"
+              : "text-gray-500 md:bg-white md:text-gray-600"
           }`}
           onClick={() => onTabChange(tab.id)}>
           {tab.label}

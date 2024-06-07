@@ -10,6 +10,7 @@ type ProjectCardProps = {
   project: Project;
   isChecked: boolean;
   onCheckboxChange: () => void;
+  className?: string;
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
@@ -19,7 +20,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
 }) => {
   return (
     <div
-      className={`flex items-center mb-4 border-2 rounded-md p-[20px] w-full ${
+      className={`flex  items-center mb-4 border-2 rounded-md p-[20px] w-full lg:w-[280px]  ${
         isChecked ? "border-custom-purple" : "border-gray-300"
       }`}>
       <div className="flex justify-start items-center space-x-2">

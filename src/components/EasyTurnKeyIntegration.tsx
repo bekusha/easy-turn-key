@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import wmnImg from "../assets/image.png";
 import zenefits from "../assets/zenefits.png";
 import expensify from "../assets/expensify.png";
@@ -30,6 +30,41 @@ const EasyTurnKeyIntegration: React.FC = () => {
     Rippling: false,
     Expensify: false,
   });
+
+  const leftProjectRef = useRef<HTMLDivElement | null>(null);
+  const rightProjectRef = useRef<HTMLDivElement | null>(null);
+
+  useEffect(() => {
+    const updateImagePosition = () => {
+      if (leftProjectRef.current && rightProjectRef.current) {
+        const leftRect = leftProjectRef.current.getBoundingClientRect();
+        const rightRect = rightProjectRef.current.getBoundingClientRect();
+
+        const leftImage = document.getElementById("leftImage");
+        const rightImage = document.getElementById("rightImage");
+
+        if (leftImage) {
+          leftImage.style.left = `${leftRect.left + 276 + window.scrollX}px`;
+          leftImage.style.top = `${leftRect.top - 530 + window.scrollY}px`;
+        }
+
+        if (rightImage) {
+          rightImage.style.left = `${
+            rightRect.right - 475.5 + window.scrollX
+          }px`;
+          rightImage.style.top = `${rightRect.top - 530 + window.scrollY}px`;
+        }
+      }
+    };
+
+    updateImagePosition();
+    window.addEventListener("resize", updateImagePosition);
+    window.addEventListener("scroll", updateImagePosition);
+    return () => {
+      window.removeEventListener("resize", updateImagePosition);
+      window.removeEventListener("scroll", updateImagePosition);
+    };
+  }, []);
 
   const tabs: { id: TabId; label: string }[] = [
     { id: "smallBusiness", label: "Small Business" },
@@ -87,6 +122,9 @@ const EasyTurnKeyIntegration: React.FC = () => {
     }));
   };
 
+  const getLineColor = (projectName: ProjectName) =>
+    checkedState[projectName] ? "#4CAF50" : "#E5D2E8";
+
   return (
     <div className="flex flex-col items-center py-8 text-center">
       <h2 className="text-3xl font-bold mb-4 mt-[50px] px-[26px] font-poppins">
@@ -102,8 +140,21 @@ const EasyTurnKeyIntegration: React.FC = () => {
         selectedTab={selectedTab}
         onTabChange={handleTabChange}
       />
-      <div className="flex flex-col justify-center items-center w-full px-[10px]">
-        <div className="bg-custom-bg  shadow-lg rounded-3xl p-8 mx-4 text-center flex flex-col items-center relative mt-10 border-2 border-custom-purple">
+      <div className="relative flex flex-col lg:flex-row lg:justify-center items-center gap-[120px] lg:items-start w-full px-[10px] lg:mt-[50px]">
+        <div className="relative flex flex-col lg:flex-1 lg:flex-row lg:flex-wrap lg:justify-end lg:items-center lg:order-1">
+          {projects.slice(0, 3).map((project, index) => (
+            <div ref={leftProjectRef} key={index}>
+              <ProjectCard
+                project={project}
+                isChecked={checkedState[project.name as ProjectName]}
+                onCheckboxChange={() =>
+                  handleCheckboxChange(project.name as ProjectName)
+                }
+              />
+            </div>
+          ))}
+        </div>
+        <div className="relative bg-custom-bg max-w-[323px] min-w-[323px] lg:max-w-[380px] lg:h-[268px] shadow-lg rounded-3xl p-8 mx-4 text-center flex flex-col items-center mt-10 lg:mt-9 lg:order-2 border-2 border-custom-purple">
           <img
             className="w-[86px] h-[86px] mx-auto mb-4 absolute -top-[50px]"
             src={wmnImg}
@@ -118,18 +169,38 @@ const EasyTurnKeyIntegration: React.FC = () => {
             to lower PTO liability."
           </p>
         </div>
-        <div className="flex-1 flex flex-col items-center pl-4 mr-5 mt-[20px] mb-[10px]">
-          {projects.map((project, index) => (
-            <ProjectCard
-              key={index}
-              project={project}
-              isChecked={checkedState[project.name as ProjectName]}
-              onCheckboxChange={() =>
-                handleCheckboxChange(project.name as ProjectName)
-              }
-            />
+        <div className="relative flex flex-col items-center lg:flex-1 lg:flex-row lg:flex-wrap lg:justify-start lg:items-center lg:order-3">
+          {projects.slice(3).map((project, index) => (
+            <div ref={rightProjectRef} key={index}>
+              <ProjectCard
+                project={project}
+                isChecked={checkedState[project.name as ProjectName]}
+                onCheckboxChange={() =>
+                  handleCheckboxChange(project.name as ProjectName)
+                }
+              />
+            </div>
           ))}
         </div>
+        <img
+          id="leftImage"
+          style={{ width: "200px", height: "250px", position: "absolute" }}
+          src="src/assets/left-lines.svg"
+          className={`absolute hidden lg:block h-auto ${getLineColor(
+            "Zenefits"
+          )}`}
+          alt="Left Connections"
+        />
+
+        <img
+          id="rightImage"
+          style={{ width: "200px", height: "250px", position: "absolute" }}
+          src="src/assets/right-lines.svg"
+          className={`absolute hidden lg:block h-auto ${getLineColor(
+            "Sapling"
+          )}`}
+          alt="Right Connections"
+        />
       </div>
     </div>
   );

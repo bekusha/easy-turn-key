@@ -15,7 +15,7 @@ type TabsProps = {
 
 const Tabs: React.FC<TabsProps> = ({ tabs, selectedTab, onTabChange }) => {
   return (
-    <div className="mt-[30px] flex flex-row sm:flex-row md:space-x-4 mb-10 border-b-2 border-gray-200 font-bold text-sm">
+    <div className="mt-[30px] flex flex-row sm:flex-row md:space-x-4  border-b-2 border-gray-200 font-bold text-sm">
       {tabs.map((tab) => (
         <button
           key={tab.id}

@@ -45,14 +45,14 @@ const EasyTurnKeyIntegration: React.FC = () => {
 
         if (leftImage) {
           leftImage.style.left = `${leftRect.left + 276 + window.scrollX}px`;
-          leftImage.style.top = `${leftRect.top - 530 + window.scrollY}px`;
+          leftImage.style.top = `${leftRect.top - 430 + window.scrollY}px`;
         }
 
         if (rightImage) {
           rightImage.style.left = `${
             rightRect.right - 475.5 + window.scrollX
           }px`;
-          rightImage.style.top = `${rightRect.top - 530 + window.scrollY}px`;
+          rightImage.style.top = `${rightRect.top - 430 + window.scrollY}px`;
         }
       }
     };
@@ -127,7 +127,7 @@ const EasyTurnKeyIntegration: React.FC = () => {
 
   return (
     <div className="flex flex-col items-center py-8 text-center">
-      <h2 className="text-3xl font-bold mb-4 mt-[50px] px-[26px] font-poppins">
+      <h2 className="text-3xl font-bold mb-4  px-[26px] font-poppins">
         <b>Easy Turn-Key Integration</b>
       </h2>
       <p className="text-gray-500 text-center max-w-2xl leading-6.5 font-normal text-base px-[26px]">
@@ -140,10 +140,10 @@ const EasyTurnKeyIntegration: React.FC = () => {
         selectedTab={selectedTab}
         onTabChange={handleTabChange}
       />
-      <div className="relative flex flex-col lg:flex-row lg:justify-center items-center gap-[120px] lg:items-start w-full px-[10px] lg:mt-[50px]">
+      <div className=" relative flex flex-col lg:flex-row   lg:justify-center items-center gap-[20px]  lg:gap-[120px] lg:items-start w-full px-[10px] lg:mt-[50px]">
         <div className="relative flex flex-col lg:flex-1 lg:flex-row lg:flex-wrap lg:justify-end lg:items-center lg:order-1">
-          {projects.slice(0, 3).map((project, index) => (
-            <div ref={leftProjectRef} key={index}>
+          {projects.slice(3).map((project, index) => (
+            <div ref={leftProjectRef} key={index} className="hidden lg:block">
               <ProjectCard
                 project={project}
                 isChecked={checkedState[project.name as ProjectName]}
@@ -154,7 +154,7 @@ const EasyTurnKeyIntegration: React.FC = () => {
             </div>
           ))}
         </div>
-        <div className="relative bg-custom-bg max-w-[323px] min-w-[323px] lg:max-w-[380px] lg:h-[268px] shadow-lg rounded-3xl p-8 mx-4 text-center flex flex-col items-center mt-10 lg:mt-9 lg:order-2 border-2 border-custom-purple">
+        <div className="relative bg-custom-bg max-w-[323px] min-w-[] lg:max-w-[380px] shadow-lg rounded-3xl p-8 mx-4 text-center flex flex-col items-center mt-[64px] lg:mt-9 order-2 lg:order-2 border-2 border-custom-purple">
           <img
             className="w-[86px] h-[86px] mx-auto mb-4 absolute -top-[50px]"
             src={wmnImg}
@@ -169,8 +169,8 @@ const EasyTurnKeyIntegration: React.FC = () => {
             to lower PTO liability."
           </p>
         </div>
-        <div className="relative flex flex-col items-center lg:flex-1 lg:flex-row lg:flex-wrap lg:justify-start lg:items-center lg:order-3">
-          {projects.slice(3).map((project, index) => (
+        <div className="relative flex flex-col  lg:flex-1 lg:flex-row lg:flex-wrap lg:justify-start lg:items-center order-3 lg:order-2">
+          {projects.slice(0, 3).map((project, index) => (
             <div ref={rightProjectRef} key={index}>
               <ProjectCard
                 project={project}

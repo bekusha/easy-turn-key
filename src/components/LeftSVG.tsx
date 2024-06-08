@@ -21,9 +21,9 @@ const LeftSVG: React.FC<LeftSVGProps> = ({ getColor }) => {
         position: "absolute",
       }}>
       <path
-        id="leftLine1"
-        d="M125 78.5125H76.1395C65.0938 78.5125 56.1395 69.5582 56.1395 58.5125V21C56.1395 9.95432 47.1852 1 36.1395 1H0.857086"
-        stroke={getColor("Zenefits")}
+        id="leftLine3"
+        d="M124.515 78.5125H0"
+        stroke={getColor("Workday")}
         strokeWidth="2"
         style={{
           transition: "stroke 0.4s ease-in-out",
@@ -39,9 +39,9 @@ const LeftSVG: React.FC<LeftSVGProps> = ({ getColor }) => {
         }}
       />
       <path
-        id="leftLine3"
-        d="M124.515 78.5125H0"
-        stroke={getColor("Workday")}
+        id="leftLine1"
+        d="M125 78.5125H76.1395C65.0938 78.5125 56.1395 69.5582 56.1395 58.5125V21C56.1395 9.95432 47.1852 1 36.1395 1H0.857086"
+        stroke={getColor("Zenefits")}
         strokeWidth="2"
         style={{
           transition: "stroke 0.4s ease-in-out",

@@ -3,7 +3,7 @@ import { ProjectName } from "../types";
 
 interface LeftSVGProps {
   getColor: (projectName: ProjectName) => string;
-  activeProject: ProjectName; // Add activeProject prop
+  activeProject: ProjectName;
 }
 
 const LeftSVG: React.FC<LeftSVGProps> = ({ getColor, activeProject }) => {

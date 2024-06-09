@@ -11,14 +11,14 @@ type ProjectCardProps = {
   isChecked: boolean;
   onCheckboxChange: () => void;
   className?: string;
-  isDisabled?: boolean; // Add an optional prop to control the disabled state
+  isDisabled?: boolean;
 };
 
 const ProjectCard: React.FC<ProjectCardProps> = ({
   project,
   isChecked,
   onCheckboxChange,
-  isDisabled = false, // Default to false if not provided
+  isDisabled = false,
 }) => {
   return (
     <div
@@ -41,7 +41,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           className="sr-only peer"
           checked={isChecked}
           onChange={onCheckboxChange}
-          disabled={isDisabled} // Disable the checkbox based on the prop
+          disabled={isDisabled}
         />
         <div
           className={`w-8 h-4 bg-white border-2 border-gray-300 rounded-full peer peer-checked:bg-purple-600 peer-checked:border-purple-600 after:content-[''] after:absolute after:top-1/2 after:left-[2px] after:bg-gray-300 after:peer-checked:bg-white after:peer-checked:left-4 after:border after:border-gray-300 after:rounded-full after:h-2 after:w-2 after:peer-checked:h-3 after:peer-checked:w-3 after:transition-all after:-translate-y-1/2 ${

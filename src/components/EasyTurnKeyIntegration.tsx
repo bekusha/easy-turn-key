@@ -119,7 +119,6 @@ const EasyTurnKeyIntegration: React.FC = () => {
     },
   };
 
-  // Map TabId to corresponding ProjectName
   const tabToProject: Record<TabId, ProjectName> = {
     smallBusiness: "Zenefits",
     mediumBusiness: "Xero",

@@ -1,0 +1,10 @@
+svg {
+  outline: 1px solid;
+}
+
+path.p2 {
+  fill: none;
+  stroke: black;
+  stroke-width: 1px;
+  shape-rendering: crispEdges;
+}

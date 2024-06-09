@@ -1,6 +1,5 @@
 import React from "react";
-
-type TabId = "smallBusiness" | "mediumBusiness" | "enterprise";
+import { TabId } from "../types";
 
 type Tab = {
   id: TabId;

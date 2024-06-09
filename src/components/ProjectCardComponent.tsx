@@ -24,10 +24,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
     <div
       className={`flex items-center mb-4 border-2 rounded-xl p-[15px] text-start w-[324px] lg:w-[280px] h-[80px] ${
         isChecked ? "border-custom-purple" : "border-gray-300"
-      } ${
-        isDisabled ? "opacity-50 cursor-not-allowed pointer-events-none" : ""
-      }`} // Add styles to indicate disabled state
-    >
+      }`}>
       <div className="flex justify-start items-center space-x-2">
         <img className="w-12 h-12" src={project.icon} alt={project.name} />
         <div className="pr-12 pl-3 flex flex-col items-start">
@@ -35,7 +32,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           <p className="text-gray-500 font-normal text-xs">{project.type}</p>
         </div>
       </div>
-      <label className="relative inline-flex items-center ml-auto">
+      <label
+        className={`relative inline-flex items-center ml-auto ${
+          isDisabled ? "pointer-events-none" : ""
+        }`}>
         <input
           type="checkbox"
           className="sr-only peer"
@@ -43,7 +43,10 @@ const ProjectCard: React.FC<ProjectCardProps> = ({
           onChange={onCheckboxChange}
           disabled={isDisabled} // Disable the checkbox based on the prop
         />
-        <div className="w-8 h-4 bg-white border-2 border-gray-300 rounded-full peer peer-checked:bg-purple-600 peer-checked:border-purple-600 after:content-[''] after:absolute after:top-1/2 after:left-[2px] after:bg-gray-300 after:peer-checked:bg-white after:peer-checked:left-4 after:border after:border-gray-300 after:rounded-full after:h-2 after:w-2 after:peer-checked:h-3 after:peer-checked:w-3 after:transition-all after:-translate-y-1/2"></div>
+        <div
+          className={`w-8 h-4 bg-white border-2 border-gray-300 rounded-full peer peer-checked:bg-purple-600 peer-checked:border-purple-600 after:content-[''] after:absolute after:top-1/2 after:left-[2px] after:bg-gray-300 after:peer-checked:bg-white after:peer-checked:left-4 after:border after:border-gray-300 after:rounded-full after:h-2 after:w-2 after:peer-checked:h-3 after:peer-checked:w-3 after:transition-all after:-translate-y-1/2 ${
+            isDisabled ? "bg-gray-200" : ""
+          }`}></div>
       </label>
     </div>
   );

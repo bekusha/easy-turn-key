@@ -10,15 +10,7 @@ import Tabs from "./TabsComponent";
 import ProjectCard from "./ProjectCardComponent";
 import LeftSVG from "./LeftSVG";
 import RightSVG from "./RightSVG";
-
-type ProjectName =
-  | "Zenefits"
-  | "Sapling"
-  | "Workday"
-  | "Xero"
-  | "Rippling"
-  | "Expensify";
-type TabId = "smallBusiness" | "mediumBusiness" | "enterprise";
+import { ProjectName, TabId } from "../types";
 
 const EasyTurnKeyIntegration: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<TabId>("mediumBusiness");
@@ -127,6 +119,13 @@ const EasyTurnKeyIntegration: React.FC = () => {
     },
   };
 
+  // Map TabId to corresponding ProjectName
+  const tabToProject: Record<TabId, ProjectName> = {
+    smallBusiness: "Zenefits",
+    mediumBusiness: "Xero",
+    enterprise: "Rippling",
+  };
+
   return (
     <div className="flex flex-col items-center py-8 text-center mb-4 lg:max-w-[100rem]">
       <h2 className="text-4xl font-bold mb-4 px-[26px] font-poppins leading-8 tracking-wide">
@@ -151,6 +150,7 @@ const EasyTurnKeyIntegration: React.FC = () => {
               className="lg:block w-full lg:w-auto ">
               <ProjectCard
                 project={project}
+                isDisabled={true}
                 isChecked={checkedState[project.name as ProjectName]}
                 onCheckboxChange={() =>
                   handleCheckboxChange(project.name as ProjectName)
@@ -159,7 +159,7 @@ const EasyTurnKeyIntegration: React.FC = () => {
             </div>
           ))}
         </div>
-        <div className="relative bg-custom-bg max-w-[323px] min-w-[280px] lg:min-h-[268px] lg:max-w-[380px] shadow-lg rounded-3xl p-5 pt-9 lg:mx-[9rem] text-center flex flex-col items-center mt-[64px] lg:mt-7 order-1 mb-8 lg:order-2 border-2 border-custom-purple">
+        <div className="relative bg-custom-bg max-w-[323px] min-w-[280px] lg:min-h-[268px] lg:max-w-[380px] shadow-lg rounded-3xl p-5 pt-9 lg:mx-[9rem] text-center flex flex-col items-center mt-[64px]  lg:mt-3 order-1 mb-8 lg:order-2 border-2 border-custom-purple">
           <img
             className="w-[86px] h-[86px] mx-auto mb-4 absolute -top-[50px]"
             src={wmnImg}
@@ -182,6 +182,7 @@ const EasyTurnKeyIntegration: React.FC = () => {
               className="lg:block w-full lg:w-auto">
               <ProjectCard
                 project={project}
+                isDisabled={true}
                 isChecked={checkedState[project.name as ProjectName]}
                 onCheckboxChange={() =>
                   handleCheckboxChange(project.name as ProjectName)
@@ -191,8 +192,14 @@ const EasyTurnKeyIntegration: React.FC = () => {
           ))}
         </div>
         <div className="hidden lg:block">
-          <LeftSVG getColor={getColor} />
-          <RightSVG getColor={getColor} />
+          <LeftSVG
+            getColor={getColor}
+            activeProject={tabToProject[selectedTab]}
+          />
+          <RightSVG
+            getColor={getColor}
+            activeProject={tabToProject[selectedTab]}
+          />
         </div>
       </div>
     </div>

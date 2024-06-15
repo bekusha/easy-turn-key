@@ -56,3 +56,9 @@ export const defaultCheckedState: Record<TabId, Record<ProjectName, boolean>> = 
     Expensify: true,
   },
 };
+
+export const tabToProject: Record<TabId, ProjectName> = {
+    smallBusiness: "Zenefits",
+    mediumBusiness: "Xero",
+    enterprise: "Rippling",
+  };

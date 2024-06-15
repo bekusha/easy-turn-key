@@ -1,16 +1,17 @@
 import React, { useEffect, useState, useRef } from "react";
 import wmnImg from "../assets/image.png";
-import zenefits from "../assets/zenefits.png";
-import expensify from "../assets/expensify.png";
-import rippling from "../assets/ripling.png";
-import sapling from "../assets/sapling.png";
-import workday from "../assets/w.png";
-import xero from "../assets/xero.png";
 import Tabs from "./TabsComponent";
 import ProjectCard from "./ProjectCardComponent";
 import LeftSVG from "./LeftSVG";
 import RightSVG from "./RightSVG";
-import { ProjectName, TabId } from "../types";
+import { ProjectName } from "../types";
+import {
+  projects,
+  tabs,
+  defaultCheckedState,
+  tabToProject,
+  TabId,
+} from "./data";
 
 const EasyTurnKeyIntegration: React.FC = () => {
   const [selectedTab, setSelectedTab] = useState<TabId>("mediumBusiness");
@@ -75,54 +76,6 @@ const EasyTurnKeyIntegration: React.FC = () => {
       ...prevState,
       [projectName]: !prevState[projectName],
     }));
-  };
-
-  const tabs: { id: TabId; label: string }[] = [
-    { id: "smallBusiness", label: "Small Business" },
-    { id: "mediumBusiness", label: "Medium Business" },
-    { id: "enterprise", label: "Enterprise" },
-  ];
-
-  const projects = [
-    { name: "Zenefits", icon: zenefits, type: "HR Management" },
-    { name: "Sapling", icon: sapling, type: "HR Management" },
-    { name: "Workday", icon: workday, type: "HR Management" },
-    { name: "Xero", icon: xero, type: "Employee Base" },
-    { name: "Rippling", icon: rippling, type: "Salary Management" },
-    { name: "Expensify", icon: expensify, type: "Expense Management" },
-  ];
-
-  const defaultCheckedState: Record<TabId, Record<ProjectName, boolean>> = {
-    smallBusiness: {
-      Zenefits: true,
-      Sapling: false,
-      Workday: false,
-      Xero: false,
-      Rippling: false,
-      Expensify: false,
-    },
-    mediumBusiness: {
-      Zenefits: false,
-      Sapling: true,
-      Workday: true,
-      Xero: true,
-      Rippling: false,
-      Expensify: false,
-    },
-    enterprise: {
-      Zenefits: false,
-      Sapling: false,
-      Workday: false,
-      Xero: false,
-      Rippling: true,
-      Expensify: true,
-    },
-  };
-
-  const tabToProject: Record<TabId, ProjectName> = {
-    smallBusiness: "Zenefits",
-    mediumBusiness: "Xero",
-    enterprise: "Rippling",
   };
 
   return (
